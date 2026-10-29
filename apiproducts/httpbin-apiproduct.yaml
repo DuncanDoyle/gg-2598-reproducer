@@ -1,0 +1,28 @@
+apiVersion: portal.solo.io/v1alpha1
+kind: ApiDoc
+metadata:
+  name: httpbin-apidoc
+  namespace: httpbin
+spec:
+  servedBy:
+    name: httpbin
+    port: 8000
+  source:
+    manual:
+      content: '{"openapi":"3.0.0","info":{"title":"HTTPBin","version":"1.0"},"paths":{"/get":{"get":{"summary":"Get","responses":{"200":{"description":"OK"}}}}}}'
+---
+# The ApiProduct puts the Portal route metadata on portal-example-com that portalAuth needs.
+apiVersion: portal.solo.io/v1alpha1
+kind: ApiProduct
+metadata:
+  name: httpbin
+  namespace: httpbin
+spec:
+  id: httpbin
+  displayName: HTTPBin
+  versions:
+    - name: "1.0"
+      targetRefs:
+      - name: portal-example-com
+        group: gateway.networking.k8s.io
+        kind: HTTPRoute

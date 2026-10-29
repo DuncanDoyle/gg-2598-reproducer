@@ -1,0 +1,11 @@
+apiVersion: portal.solo.io/v1alpha1
+kind: Portal
+metadata:
+  name: portal
+  namespace: kgateway-system
+spec:
+  visibility:
+    public: true
+  apiProductRefs:
+  - name: httpbin
+    namespace: httpbin

@@ -1,0 +1,29 @@
+apiVersion: enterprisekgateway.solo.io/v1alpha1
+kind: EnterpriseKgatewayTrafficPolicy
+metadata:
+  name: apikey-httproute-policy
+  namespace: httpbin
+spec:
+  targetRefs:
+    - name: apikey-example-com
+      group: gateway.networking.k8s.io
+      kind: HTTPRoute
+  entExtAuth:
+    authConfigRef:
+      name: apikey-auth
+      namespace: httpbin
+---
+apiVersion: enterprisekgateway.solo.io/v1alpha1
+kind: EnterpriseKgatewayTrafficPolicy
+metadata:
+  name: portalauth-httproute-policy
+  namespace: httpbin
+spec:
+  targetRefs:
+    - name: portal-example-com
+      group: gateway.networking.k8s.io
+      kind: HTTPRoute
+  entExtAuth:
+    authConfigRef:
+      name: portalauth-apikey
+      namespace: kgateway-system

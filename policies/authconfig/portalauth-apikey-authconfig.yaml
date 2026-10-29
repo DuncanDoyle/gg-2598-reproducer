@@ -1,0 +1,15 @@
+# Portal API key auth, on the same x-api-key header.
+# BUG: a missing or invalid key returns 403 with no WWW-Authenticate header.
+# Expected: 401 with "WWW-Authenticate: API key is missing or invalid", as with apikey-auth.
+apiVersion: extauth.solo.io/v1
+kind: AuthConfig
+metadata:
+  name: portalauth-apikey
+  namespace: kgateway-system
+spec:
+  configs:
+    - name: portalAuth
+      portalAuth:
+        url: http://portal-portal.kgateway-system.svc.cluster.local:8080
+        cacheDuration: 10s
+        apiKeyHeader: x-api-key

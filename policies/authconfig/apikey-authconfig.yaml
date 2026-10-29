@@ -1,0 +1,13 @@
+# Standalone API key auth. A missing or invalid key returns
+# 401 with "WWW-Authenticate: API key is missing or invalid".
+apiVersion: extauth.solo.io/v1
+kind: AuthConfig
+metadata:
+  name: apikey-auth
+  namespace: httpbin
+spec:
+  configs:
+    - apiKeyAuth:
+        headerName: x-api-key
+        labelSelector:
+          apikey: httpbin
